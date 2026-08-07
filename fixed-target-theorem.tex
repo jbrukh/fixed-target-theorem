@@ -1,0 +1,268 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.30em}
+\allowdisplaybreaks
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\NOne}{N_1}
+\newcommand{\NTwo}{N_2}
+
+\title{The Fixed-Target Theorem}
+\author{Jake Brukhman\\\texttt{jake@coinfund.io}
+\and GPT 5.6 Sol}
+\date{}
+
+\hypersetup{
+  pdftitle={The Fixed-Target Theorem},
+  pdfauthor={Jake Brukhman and GPT 5.6 Sol}
+}
+
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+Seymour's Second Neighborhood Conjecture asserts that every finite oriented
+graph has a vertex with at least as many exact second outneighbors as
+outneighbors.  Established cases include tournaments, proved by
+Fisher~\cite{Fisher1996}, and oriented graphs of minimum outdegree at most six,
+proved by Kaneko and Locke~\cite{KanekoLocke2001}.  We give a short
+fixed-target counting proof that the conjecture holds for every oriented graph
+of order $n$ and minimum outdegree $\delta$ satisfying $n\le 2\delta+2$.
+\end{abstract}
+
+\section{Definitions and statement}
+
+A finite \emph{directed graph} is a pair
+$G=(V(G),A(G))$, where $V(G)$ is a finite set of vertices and
+$A(G)$ is a set of ordered pairs of distinct vertices, called \emph{arcs}.
+We write
+\[
+                              u\to v
+\]
+when $(u,v)\in A(G)$.  Thus the arrow points from the source of the arc to
+its target.  The directed graph is \emph{oriented} if, for every two distinct
+vertices $u,v$, at most one of $u\to v$ and $v\to u$ is present.
+
+For a vertex $v\in V(G)$, define its outdegree and indegree by
+\[
+ d^+(v)=|\{x\in V(G):v\to x\}|,
+ \qquad
+ d^-(v)=|\{x\in V(G):x\to v\}|.
+\]
+The minimum outdegree of $G$ is
+\[
+                         \delta=\min_{v\in V(G)}d^+(v).
+\]
+
+For a vertex $v\in V(G)$, define the exact first outneighborhood by
+\[
+                    \NOne(v)=\{x\in V(G):v\to x\},
+\]
+and the exact second outneighborhood by
+\[
+ \NTwo(v)=
+ \{x\in V(G)\setminus\NOne(v):
+   y\to x\text{ for some }y\in\NOne(v)\}.
+\]
+Direct outneighbors are excluded explicitly.  The vertex $v$ is excluded
+automatically: a path $v\to y\to v$ would be a directed $2$-cycle, which an
+oriented graph cannot contain.  Thus $\NTwo(v)$ consists exactly of the
+vertices reached from $v$ in two steps but not in one step.  In a reachability statement from $v$ to $x$, we
+call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}.
+
+A vertex $v$ is a \emph{Seymour vertex} if
+\[
+                         |\NTwo(v)|\ge|\NOne(v)|.
+\]
+Seymour's Second Neighborhood Conjecture says that every finite oriented graph
+has a Seymour vertex.
+
+\begin{theorem}[Fixed-target theorem]\label{thm:fixed-target}
+Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
+If
+\[
+                              n\le2\delta+2,
+\]
+then $G$ has a Seymour vertex.
+\end{theorem}
+
+\section{The fixed-target capacity bound}
+
+For a source vertex $v$, define
+\[
+ U(v)=V(G)\setminus\bigl(\{v\}\cup\NOne(v)\cup\NTwo(v)\bigr).
+\]
+Thus $U(v)$ is the set of target vertices that the source $v$ cannot reach in
+at most two steps.
+
+Now fix a target vertex $x$.  Define the \emph{trap} of $x$ by
+\[
+ T(x)=\{y\in V(G)\setminus\{x\}:y\nrightarrow x\}.
+\]
+These are exactly the vertices that do not send an arc to $x$.  Because $G$
+is oriented, every outneighbor of $x$ belongs to $T(x)$.  Hence
+\[
+                         |T(x)|\ge d^+(x)\ge\delta.
+\]
+Define the \emph{target slack}
+\[
+                         q(x)=|T(x)|-\delta\ge0.
+\]
+Here both $|T(x)|$ and $\delta$ count vertices: $\delta$ is the minimum
+number of outneighbors at any vertex.  Thus $q(x)$ is the number of vertices
+by which the trap exceeds the size of a minimum outneighborhood.
+
+Define
+\[
+                         P(x)=\{v\in V(G):x\in U(v)\}.
+\]
+Thus $P(x)$ is the set of source vertices from which the fixed target $x$
+cannot be reached in at most two steps.  If $v\in P(x)$, then $v\nrightarrow
+x$.  Moreover, no vertex of $\NOne(v)$ points to $x$, since otherwise there
+would be a two-step path from $v$ to $x$.  Therefore
+\[
+                         \{v\}\cup\NOne(v)\subseteq T(x).   \tag{1}
+\]
+This is the fixed-target observation: every source missing $x$, together with
+all of its outneighbors, is confined to the same trap $T(x)$.
+
+\begin{lemma}[Fixed-target capacity]\label{lem:capacity}
+For every target vertex $x$,
+\[
+ |P(x)|=0\quad\text{if }q(x)=0,
+ \qquad
+ |P(x)|\le2q(x)-1\quad\text{if }P(x)\ne\varnothing.
+\]
+\end{lemma}
+
+\begin{proof}
+By (1), every arc whose source lies in $P(x)$ has its target in $T(x)$.
+There are at least $\delta|P(x)|$ such arcs.  At most
+$\binom{|P(x)|}{2}$ have both endpoints in $P(x)$, because $G$ is oriented,
+and at most
+$|P(x)|\bigl(|T(x)|-|P(x)|\bigr)$ go from $P(x)$ to the rest of the trap.
+Consequently, if $P(x)\ne\varnothing$, then
+\[
+ \delta|P(x)|
+ \le \binom{|P(x)|}{2}
+    +|P(x)|\bigl(\delta+q(x)-|P(x)|\bigr).
+\]
+Dividing by $|P(x)|$ and rearranging gives
+$|P(x)|\le2q(x)-1$.  This is impossible when $q(x)=0$, so then
+$P(x)=\varnothing$.
+\end{proof}
+
+The point of the lemma is that target slack is the only room available for
+packing many source vertices that all miss the same target.
+
+\section{Proof of the theorem}
+
+Suppose for contradiction that $G$ has no Seymour vertex.  Then $\delta>0$,
+since a vertex of outdegree zero is automatically a Seymour vertex.  Counting
+arcs by their sources gives
+\[
+                         n\delta\le|A(G)|\le\binom n2.
+\]
+Therefore $n\ge2\delta+1$.  Together with the hypothesis, this leaves
+\[
+                         c:=n-2\delta\in\{1,2\}.             \tag{2}
+\]
+
+Let
+\[
+                  L=\{v\in V(G):d^+(v)=\delta\},
+                  \qquad \ell=|L|.
+\]
+Every $v\in L$ is not a Seymour vertex, so $|\NTwo(v)|\le\delta-1$.
+Hence
+\[
+ |U(v)|=n-1-\delta-|\NTwo(v)|\ge n-2\delta=c.               \tag{3}
+\]
+Thus each minimum-outdegree source contributes at least $c$ unreachable
+targets.
+
+Let
+\[
+ I=\bigl|\{(v,x)\in V(G)^2:x\in U(v)\}\bigr|.
+\]
+Counting these ordered source--target pairs first by their source and then by
+their target gives
+\[
+                    I=\sum_{v\in V(G)}|U(v)|
+                     =\sum_{x\in V(G)}|P(x)|.               \tag{4}
+\]
+This explains the double count: $x\in U(v)$ and $v\in P(x)$ describe the
+same ordered pair $(v,x)$.  From (3),
+\[
+                              I\ge c\ell>0.                  \tag{5}
+\]
+
+Put
+\[
+                              Q=\sum_{x\in V(G)}q(x).
+\]
+Since $I>0$, at least one set $P(x)$ is nonempty; the capacity lemma then
+implies that at least one $q(x)$ is positive.  Applying the lemma in (4) gives
+\[
+ I\le\sum_{q(x)>0}\bigl(2q(x)-1\bigr)
+   <2\sum_xq(x)=2Q.                                          \tag{6}
+\]
+So the total target capacity is strictly less than twice the total target
+slack.
+
+It remains to compare $Q$ with $\ell$.  Since
+$|T(x)|=n-1-d^-(x)$,
+\[
+ q(x)=n-1-\delta-d^-(x).
+\]
+Total indegree equals total outdegree, and every vertex outside $L$ has
+outdegree at least $\delta+1$.  Therefore
+\begin{equation}
+\begin{aligned}
+ Q
+ &=n(n-1-\delta)-\sum_xd^+(x)\\
+ &\le n(n-1-\delta)
+   -\bigl(\ell\delta+(n-\ell)(\delta+1)\bigr)\\
+ &=\ell+n(c-2).
+\end{aligned}
+\tag{7}
+\end{equation}
+This degree ledger bounds the total room in all target traps using only the
+number of minimum-outdegree vertices.
+
+If $c=1$, then (7) gives
+\[
+                           0<Q\le\ell-n\le0,
+\]
+a contradiction.  If $c=2$, then (5)--(7) give
+\[
+                           I<2Q\le2\ell\le I,
+\]
+again a contradiction.  Hence $G$ has a Seymour vertex.
+
+\begin{thebibliography}{9}
+
+\bibitem{Fisher1996}
+D.~C. Fisher,
+\emph{Squaring a tournament: A proof of Dean's conjecture},
+Journal of Graph Theory \textbf{23} (1996), 43--48.
+
+\bibitem{KanekoLocke2001}
+Y.~Kaneko and S.~C. Locke,
+\emph{The minimum degree approach for Paul Seymour's distance 2 conjecture},
+Congressus Numerantium \textbf{148} (2001), 201--206.
+
+\end{thebibliography}
+
+\end{document}
