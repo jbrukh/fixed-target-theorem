@@ -59,6 +59,9 @@ $\delta$ is the minimum outdegree, with no prescribed structure on the missing
 edges.
 Together with Fisher's tournament theorem, this implies the conjecture for
 every oriented graph satisfying $n\le2\delta+2$.
+Combined with the known minimum-outdegree results, this raises the unconditional
+lower bound on the order of a counterexample from $16$ to $17$ and, conditional
+on the recent minimum-outdegree-seven preprint, from $18$ to $19$.
 
 \end{abstract}
 
@@ -80,20 +83,17 @@ vertices $u,v$, at most one of $u\to v$ and $v\to u$ is present. For a vertex $v
  d^-(v)=|\{x\in V(G):x\to v\}|.
 \]
 The minimum outdegree of $G$ is
-$\delta=\min_{v\in V(G)}d^+(v).$ For a vertex $v\in V(G)$, define the exact first outneighborhood by
+$\delta=\min_{v\in V(G)}d^+(v).$ For a vertex $v\in V(G)$, define the \textit{exact first outneighborhood} by
 \[
                     \NOne(v)=\{x\in V(G):v\to x\},
 \]
-and the exact second outneighborhood by
+and the \textit{exact second outneighborhood} by
 \[
  \NTwo(v)=
  \{x\in V(G)\setminus\NOne(v):
    y\to x\text{ for some }y\in\NOne(v)\}.
 \]
-Note that $\NTwo(v)$ is disjoint from $\NOne(v)$ and $\{v\}$. Thus $\NTwo(v)$ consists exactly of the
-vertices reached from $v$ in two steps but not in one step.  When discussing reachability from $v$ to $x$, we
-call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if
-$|\NTwo(v)|\ge|\NOne(v)|.$
+Note that $\NTwo(v)$ is disjoint from $\NOne(v)$ and also $\{v\}$. Thus $\NTwo(v)$ consists exactly of the vertices reached from $v$ in two steps but not in one step.  When discussing reachability from $v$ to $x$, we call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if $|\NTwo(v)|\ge|\NOne(v)|.$
 
 \begin{conjecture}[Seymour]
 Every finite oriented graph has a Seymour vertex.
@@ -105,7 +105,14 @@ missing-edge structures, and Ghazal~\cite{Ghazal2012} generalized that line of
 work.  Espuny D\'iaz, Gir\~ao, Granet, and
 Kronenberg~\cite{EspunyDiazEtAl2024} obtained reductions involving minimum
 outdegree, and Guo, Kang, and Zwaneveld~\cite{GuoKangZwaneveld2026} studied
-Seymour-tight orientations and counterexamples close to regular tournaments. We present the following result.
+Seymour-tight orientations and counterexamples close to regular tournaments.
+
+Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$. Counting arcs by their sources gives
+\[
+                         n\delta\le|A(G)|\le\binom n2,
+\]
+so $n\ge2\delta+1$. Equality forces every pair of vertices to be adjacent and every outdegree to equal $\delta$, so the graph is a regular tournament which we know satisfies the conjecture by Fisher's theorem.
+
 
 \begin{theorem}[Fixed-target theorem]\label{thm:fixed-target}
 Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
@@ -116,30 +123,6 @@ If
 then $G$ has a Seymour vertex.
 \end{theorem}
 
-Every oriented graph satisfies $n\ge2\delta+1$.  Equality forces every pair
-of vertices to be adjacent and every outdegree to equal $\delta$, so the graph
-is a regular tournament and Fisher's theorem applies.  Thus
-Theorem~\ref{thm:fixed-target} treats the only order in the range
-$n\le2\delta+2$ that is not already forced into Fisher's setting.  Combining
-the two results gives the following convenient form.
-
-\begin{corollary}[Dense-case corollary]\label{cor:dense-case}
-Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
-If $n\le2\delta+2$, then $G$ has a Seymour vertex.
-\end{corollary}
-
-\begin{proof}
-Counting arcs by their sources gives
-\[
-                         n\delta\le|A(G)|\le\binom n2,
-\]
-so $n\ge2\delta+1$.  If $n=2\delta+2$, apply
-Theorem~\ref{thm:fixed-target}.  If $n=2\delta+1$, both arc-counting
-inequalities are equalities.  Hence every pair of vertices is adjacent and
-every vertex has outdegree $\delta$; in particular, $G$ is a regular
-tournament, so Fisher's theorem~\cite{Fisher1996} applies.
-\end{proof}
-
 At $n=2\delta+2$, up to $n/2$ edges may be missing and no structure is
 imposed on them, in contrast to~\cite{FidlerYuster2007,Ghazal2012};
 conversely, those results impose no lower bound on the minimum outdegree, so
@@ -148,6 +131,29 @@ any counterexample to the conjecture must satisfy $n\ge2\delta+3$:
 counterexamples, if any exist, can be made close to regular tournaments in
 the sense of~\cite{GuoKangZwaneveld2026}, but they cannot occur at the two
 densest orders an oriented graph of minimum outdegree $\delta$ can have.
+
+\begin{corollary}[Dense-case corollary]\label{cor:dense-case}
+Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
+If $n\le2\delta+2$, then $G$ has a Seymour vertex.
+\end{corollary}
+
+\begin{proof}
+Immediately from Fisher and Theorem \ref{thm:fixed-target}.
+\end{proof}
+
+\begin{corollary}[Minimum counterexample order]\label{cor:counterexample-order}
+Every counterexample to Seymour's conjecture has at least $17$ vertices.
+Assuming the minimum-outdegree-seven result of Sadhukhan, Sandeep, and
+Sen~\cite{SadhukhanSandeepSen2026}, every counterexample has at least $19$
+vertices.
+\end{corollary}
+
+\begin{proof}
+By Kaneko and Locke's theorem~\cite{KanekoLocke2001}, a counterexample has
+minimum outdegree $\delta\ge7$.  Corollary~\ref{cor:dense-case} then gives
+$n\ge2\delta+3\ge17$.  Under the result of Sadhukhan, Sandeep, and Sen, the
+case $\delta=7$ is also excluded, so $\delta\ge8$ and hence $n\ge19$.
+\end{proof}
 
 \section{The fixed-target capacity bound}
 
