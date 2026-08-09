@@ -167,7 +167,8 @@ For every target vertex $x$,
 
 \begin{proof}
 Fix $x$ and set $p:=|P(x)|$.
-By (1), every arc whose source lies in $P(x)$ has its target in $T(x)$.
+By (1), $P(x)\subseteq T(x)$, and every arc whose source lies in $P(x)$
+has its target in $T(x)$.
 There are at least $\delta p$ such arcs.  At most
 $\binom{p}{2}$ have both endpoints in $P(x)$, because $G$ is oriented, and at
 most $p\bigl(|T(x)|-p\bigr)$ go from $P(x)$ to the rest of the trap.
@@ -202,6 +203,7 @@ Let
                   L=\{v\in V(G):d^+(v)=\delta\},
                   \qquad \ell=|L|.
 \]
+Some vertex attains the minimum outdegree, so $\ell\ge1$.
 Every $v\in L$ is not a Seymour vertex, so $|\NTwo(v)|\le\delta-1$.
 Hence
 \[
