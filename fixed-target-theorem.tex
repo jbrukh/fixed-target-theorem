@@ -23,6 +23,7 @@
 \theoremstyle{plainsl}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem*{conjecture}{Conjecture}
 
 \theoremstyle{remark}
@@ -52,10 +53,12 @@ proved by Kaneko and Locke~\cite{KanekoLocke2001}; a recent preprint treats
 minimum outdegree seven~\cite{SadhukhanSandeepSen2026}.  For dense incomplete
 graphs, Fidler and Yuster proved the conjecture when the missing edges form a
 matching, a star, or a clique~\cite{FidlerYuster2007}, and Ghazal extended this
-direction to generalized stars~\cite{Ghazal2012}.  We give a short
-counting proof that the conjecture holds for every oriented graph of order $n$
-and minimum outdegree $\delta$ satisfying $n\le 2\delta+2$, a dense case with no prescribed
-structure on the missing edges.
+direction to generalized stars~\cite{Ghazal2012}.  We give a short counting
+proof of the conjecture for every oriented graph of order $n=2\delta+2$, where
+$\delta$ is the minimum outdegree, with no prescribed structure on the missing
+edges.
+Together with Fisher's tournament theorem, this implies the conjecture for
+every oriented graph satisfying $n\le2\delta+2$.
 
 \end{abstract}
 
@@ -87,9 +90,7 @@ and the exact second outneighborhood by
  \{x\in V(G)\setminus\NOne(v):
    y\to x\text{ for some }y\in\NOne(v)\}.
 \]
-Direct outneighbors are excluded explicitly.  The vertex $v$ is excluded
-automatically: a path $v\to y\to v$ would be a directed $2$-cycle, which an
-oriented graph cannot contain.  Thus $\NTwo(v)$ consists exactly of the
+Note that $\NTwo(v)$ is disjoint from $\NOne(v)$ and $\{v\}$. Thus $\NTwo(v)$ consists exactly of the
 vertices reached from $v$ in two steps but not in one step.  When discussing reachability from $v$ to $x$, we
 call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if
 $|\NTwo(v)|\ge|\NOne(v)|.$
@@ -110,25 +111,43 @@ Seymour-tight orientations and counterexamples close to regular tournaments. We 
 Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
 If
 \[
-                              n\le2\delta+2,
+                              n=2\delta+2,
 \]
 then $G$ has a Seymour vertex.
 \end{theorem}
 
-Two remarks locate the content of Theorem~\ref{thm:fixed-target}.  First,
-every oriented graph satisfies $n\ge2\delta+1$, and equality is attained only
-when every pair of vertices is adjacent and every outdegree equals $\delta$,
-that is, when $G$ is a regular tournament.  The case $n=2\delta+1$ is
-therefore contained in Fisher's theorem~\cite{Fisher1996}, although the proof
-below is independent and short.  The new content is the case $n=2\delta+2$,
-where up to $n/2$ edges may be missing and no structure is imposed on them,
-in contrast to~\cite{FidlerYuster2007,Ghazal2012}; conversely, those results
-impose no lower bound on the minimum outdegree, so neither result contains
-the other.  Second, the theorem shows that any counterexample to the
-conjecture must satisfy $n\ge2\delta+3$: counterexamples, if any exist, can
-be made close to regular tournaments in the sense
-of~\cite{GuoKangZwaneveld2026}, but they cannot occur at the two densest
-orders an oriented graph of minimum outdegree $\delta$ can have.
+Every oriented graph satisfies $n\ge2\delta+1$.  Equality forces every pair
+of vertices to be adjacent and every outdegree to equal $\delta$, so the graph
+is a regular tournament and Fisher's theorem applies.  Thus
+Theorem~\ref{thm:fixed-target} treats the only order in the range
+$n\le2\delta+2$ that is not already forced into Fisher's setting.  Combining
+the two results gives the following convenient form.
+
+\begin{corollary}[Dense-case corollary]\label{cor:dense-case}
+Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
+If $n\le2\delta+2$, then $G$ has a Seymour vertex.
+\end{corollary}
+
+\begin{proof}
+Counting arcs by their sources gives
+\[
+                         n\delta\le|A(G)|\le\binom n2,
+\]
+so $n\ge2\delta+1$.  If $n=2\delta+2$, apply
+Theorem~\ref{thm:fixed-target}.  If $n=2\delta+1$, both arc-counting
+inequalities are equalities.  Hence every pair of vertices is adjacent and
+every vertex has outdegree $\delta$; in particular, $G$ is a regular
+tournament, so Fisher's theorem~\cite{Fisher1996} applies.
+\end{proof}
+
+At $n=2\delta+2$, up to $n/2$ edges may be missing and no structure is
+imposed on them, in contrast to~\cite{FidlerYuster2007,Ghazal2012};
+conversely, those results impose no lower bound on the minimum outdegree, so
+neither result contains the other.  Corollary~\ref{cor:dense-case} shows that
+any counterexample to the conjecture must satisfy $n\ge2\delta+3$:
+counterexamples, if any exist, can be made close to regular tournaments in
+the sense of~\cite{GuoKangZwaneveld2026}, but they cannot occur at the two
+densest orders an oriented graph of minimum outdegree $\delta$ can have.
 
 \section{The fixed-target capacity bound}
 
@@ -203,28 +222,18 @@ packing many source vertices that all miss the same target.
 \section{Proof of the theorem}
 
 Suppose for contradiction that $G$ has no Seymour vertex.  Then $\delta>0$,
-since a vertex of outdegree zero is automatically a Seymour vertex.  Counting
-arcs by their sources gives
-\[
-                         n\delta\le|A(G)|\le\binom n2.
-\]
-Therefore $n\ge2\delta+1$.  Together with the hypothesis, this leaves
-\begin{equation}\label{eq:c}
- c:=n-2\delta\in\{1,2\}.
-\end{equation}
-
-Let
+since a vertex of outdegree zero is automatically a Seymour vertex.  Let
 \[
                   L=\{v\in V(G):d^+(v)=\delta\},
                   \qquad \ell=|L|.
 \]
 Some vertex attains the minimum outdegree, so $\ell\ge1$.
 Every $v\in L$ is not a Seymour vertex, so $|\NTwo(v)|\le\delta-1$.
-Hence
+Since $n=2\delta+2$, it follows that
 \begin{equation}\label{eq:demand}
- |U(v)|=n-1-\delta-|\NTwo(v)|\ge n-2\delta=c.
+ |U(v)|=n-1-\delta-|\NTwo(v)|\ge2.
 \end{equation}
-Thus each minimum-outdegree source contributes at least $c$ unreachable
+Thus each minimum-outdegree source contributes at least two unreachable
 targets. Let
 \[
  I=\bigl|\{(v,x)\in V(G)^2:x\in U(v)\}\bigr|.
@@ -238,7 +247,7 @@ their target gives
 since $x\in U(v)$ and $v\in P(x)$ describe the
 same ordered pair $(v,x)$.  From \eqref{eq:demand},
 \begin{equation}\label{eq:lower}
-                              I\ge c\ell>0.
+                              I\ge2\ell>0.
 \end{equation}
 
 Put
@@ -267,26 +276,23 @@ outdegree at least $\delta+1$.  Therefore
  &=n(n-1-\delta)-\sum_xd^+(x)\\
  &\le n(n-1-\delta)
    -\bigl(\ell\delta+(n-\ell)(\delta+1)\bigr)\\
- &=\ell+n(c-2).
+ &=\ell,
 \end{aligned}
 \end{equation}
+where the last equality uses $n=2\delta+2$.
 This degree ledger bounds the total room in all target traps using only the
 number of minimum-outdegree vertices.
 
-If $c=1$, then \eqref{eq:ledger} gives
-\[
-                           0<Q\le\ell-n\le0,
-\]
-a contradiction.  If $c=2$, then \eqref{eq:lower}--\eqref{eq:ledger} give
+Now \eqref{eq:lower}--\eqref{eq:ledger} give
 \[
                            I<2Q\le2\ell\le I,
 \]
-again a contradiction.  Hence $G$ has a Seymour vertex.
+a contradiction.  Hence $G$ has a Seymour vertex.
 
 \begin{remark}
 The bound $n\le2\delta+2$ is exactly where this argument stops.  For
-$c=n-2\delta=3$, the ledger \eqref{eq:ledger} gives only $Q\le\ell+n$, while
-\eqref{eq:lower} gives $I\ge3\ell$; since $\ell\le n$, the comparison
+$n=2\delta+3$, the same ledger calculation gives only $Q\le\ell+n$, while
+the demand calculation gives $I\ge3\ell$; since $\ell\le n$, the comparison
 $I<2Q\le2\ell+2n$ no longer yields a contradiction.  Extending the method
 past $n=2\delta+2$ therefore requires new ideas.
 \end{remark}
