@@ -62,10 +62,10 @@ The author initiated and directed the investigation, curated intermediate result
 
 ## Contents
 
-- [`fixed-target-theorem.pdf`](fixed-target-theorem.pdf) — the paper
-- [`fixed-target-theorem.tex`](fixed-target-theorem.tex) — LaTeX source
+- [`dense-case-snc.pdf`](dense-case-snc.pdf) — the paper
+- [`dense-case-snc.tex`](dense-case-snc.tex) — LaTeX source
 
-Build with `pdflatex fixed-target-theorem.tex`.
+Build with `pdflatex dense-case-snc.tex`.
 
 ## Status
 
