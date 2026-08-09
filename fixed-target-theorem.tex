@@ -1,47 +1,66 @@
-\documentclass[10pt]{article}
+\documentclass[12pt]{article}
 
-\usepackage[margin=0.78in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage[english]{babel}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{microtype}
+\usepackage{fullpage}
 \usepackage[hidelinks]{hyperref}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.30em}
 \allowdisplaybreaks
 
-\newtheorem{theorem}{Theorem}
+\newtheoremstyle{plainsl}
+  {\topsep}
+  {\topsep}
+  {\slshape}
+  {}
+  {\normalfont\bfseries}
+  {.}
+  { }
+  {}
+
+\theoremstyle{plainsl}
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{conjecture}{Conjecture}
+
+\numberwithin{equation}{section}
 
 \newcommand{\NOne}{N_1}
 \newcommand{\NTwo}{N_2}
 
-\title{The Fixed-Target Theorem}
-\author{Jake Brukhman\\\texttt{jake@coinfund.io}
-\and GPT 5.6 Sol}
-\date{}
+\title{A dense-case theorem for Seymour's second-neighborhood conjecture}
+\author{Jake Brukhman}
+\date{9 August 2026}
 
 \hypersetup{
-  pdftitle={The Fixed-Target Theorem},
-  pdfauthor={Jake Brukhman and GPT 5.6 Sol}
+  pdftitle={A dense-case theorem for Seymour's second-neighborhood conjecture},
+  pdfauthor={Jake Brukhman}
 }
 
 \begin{document}
 \maketitle
-\vspace{-1.5em}
+
+\begingroup
+\renewcommand\thefootnote{}
+\footnotetext[0]{Email: \texttt{jake@coinfund.io}}
+\endgroup
 
 \begin{abstract}
 Seymour's Second Neighborhood Conjecture asserts that every finite oriented
 graph has a vertex with at least as many exact second outneighbors as
 outneighbors.  Established cases include tournaments, proved by
 Fisher~\cite{Fisher1996}, and oriented graphs of minimum outdegree at most six,
-proved by Kaneko and Locke~\cite{KanekoLocke2001}.  We give a short
-fixed-target counting proof that the conjecture holds for every oriented graph
-of order $n$ and minimum outdegree $\delta$ satisfying $n\le 2\delta+2$.
+proved by Kaneko and Locke~\cite{KanekoLocke2001}; a recent preprint treats
+minimum outdegree seven~\cite{SadhukhanSandeepSen2026}.  For dense incomplete
+graphs, Fidler and Yuster proved the conjecture when the missing edges form a
+matching, a star, or a clique~\cite{FidlerYuster2007}, and Ghazal extended this
+direction to generalized stars~\cite{Ghazal2012}.  We give a short fixed-target
+counting proof that the conjecture holds for every oriented graph of order $n$
+and minimum outdegree $\delta$ satisfying $n\le 2\delta+2$, a dense-case with no prescribed
+structure on the missing edges.
+
 \end{abstract}
 
-\section{Definitions and statement}
+\section{Introduction}
 
 A finite \emph{directed graph} is a pair
 $G=(V(G),A(G))$, where $V(G)$ is a finite set of vertices and
@@ -52,20 +71,14 @@ We write
 \]
 when $(u,v)\in A(G)$.  Thus the arrow points from the source of the arc to
 its target.  The directed graph is \emph{oriented} if, for every two distinct
-vertices $u,v$, at most one of $u\to v$ and $v\to u$ is present.
-
-For a vertex $v\in V(G)$, define its outdegree and indegree by
+vertices $u,v$, at most one of $u\to v$ and $v\to u$ is present. For a vertex $v\in V(G)$, define its outdegree and indegree by
 \[
  d^+(v)=|\{x\in V(G):v\to x\}|,
  \qquad
  d^-(v)=|\{x\in V(G):x\to v\}|.
 \]
 The minimum outdegree of $G$ is
-\[
-                         \delta=\min_{v\in V(G)}d^+(v).
-\]
-
-For a vertex $v\in V(G)$, define the exact first outneighborhood by
+$\delta=\min_{v\in V(G)}d^+(v).$ For a vertex $v\in V(G)$, define the exact first outneighborhood by
 \[
                     \NOne(v)=\{x\in V(G):v\to x\},
 \]
@@ -79,14 +92,20 @@ Direct outneighbors are excluded explicitly.  The vertex $v$ is excluded
 automatically: a path $v\to y\to v$ would be a directed $2$-cycle, which an
 oriented graph cannot contain.  Thus $\NTwo(v)$ consists exactly of the
 vertices reached from $v$ in two steps but not in one step.  In a reachability statement from $v$ to $x$, we
-call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}.
+call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if
+$|\NTwo(v)|\ge|\NOne(v)|.$
 
-A vertex $v$ is a \emph{Seymour vertex} if
-\[
-                         |\NTwo(v)|\ge|\NOne(v)|.
-\]
-Seymour's Second Neighborhood Conjecture says that every finite oriented graph
-has a Seymour vertex.
+\begin{conjecture}[Seymour]
+Every finite oriented graph has a Seymour vertex.
+\end{conjecture}
+
+Several results bear directly on dense or extremal cases.  Fidler and
+Yuster~\cite{FidlerYuster2007} proved the conjecture for several prescribed
+missing-edge structures, and Ghazal~\cite{Ghazal2012} generalized that line of
+work.  Espuny D\'iaz, Gir\~ao, Granet, and
+Kronenberg~\cite{EspunyDiazEtAl2024} obtained reductions involving minimum
+outdegree, and Guo, Kang, and Zwaneveld~\cite{GuoKangZwaneveld2026} studied
+Seymour-tight orientations and counterexamples close to regular tournaments. We present the following result.
 
 \begin{theorem}[Fixed-target theorem]\label{thm:fixed-target}
 Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
@@ -134,7 +153,7 @@ would be a two-step path from $v$ to $x$.  Therefore
 \[
                          \{v\}\cup\NOne(v)\subseteq T(x).   \tag{1}
 \]
-This is the fixed-target observation: every source missing $x$, together with
+This is the fixed-target observation: every source $v$ that cannot reach $x$ in 2 steps, together with
 all of its outneighbors, is confined to the same trap $T(x)$.
 
 \begin{lemma}[Fixed-target capacity]\label{lem:capacity}
@@ -147,20 +166,19 @@ For every target vertex $x$,
 \end{lemma}
 
 \begin{proof}
+Fix $x$ and set $p:=|P(x)|$.
 By (1), every arc whose source lies in $P(x)$ has its target in $T(x)$.
-There are at least $\delta|P(x)|$ such arcs.  At most
-$\binom{|P(x)|}{2}$ have both endpoints in $P(x)$, because $G$ is oriented,
-and at most
-$|P(x)|\bigl(|T(x)|-|P(x)|\bigr)$ go from $P(x)$ to the rest of the trap.
-Consequently, if $P(x)\ne\varnothing$, then
+There are at least $\delta p$ such arcs.  At most
+$\binom{p}{2}$ have both endpoints in $P(x)$, because $G$ is oriented, and at
+most $p\bigl(|T(x)|-p\bigr)$ go from $P(x)$ to the rest of the trap.
+Consequently, if $p>0$, then
 \[
- \delta|P(x)|
- \le \binom{|P(x)|}{2}
-    +|P(x)|\bigl(\delta+q(x)-|P(x)|\bigr).
+ \delta p
+ \le \binom{p}{2}
+    +p\bigl(\delta+q(x)-p\bigr).
 \]
-Dividing by $|P(x)|$ and rearranging gives
-$|P(x)|\le2q(x)-1$.  This is impossible when $q(x)=0$, so then
-$P(x)=\varnothing$.
+Dividing by $p$ and rearranging gives $p\le2q(x)-1$.  This is impossible when
+$q(x)=0$, so then $p=0$.
 \end{proof}
 
 The point of the lemma is that target slack is the only room available for
@@ -202,7 +220,7 @@ their target gives
                     I=\sum_{v\in V(G)}|U(v)|
                      =\sum_{x\in V(G)}|P(x)|.               \tag{4}
 \]
-This explains the double count: $x\in U(v)$ and $v\in P(x)$ describe the
+since $x\in U(v)$ and $v\in P(x)$ describe the
 same ordered pair $(v,x)$.  From (3),
 \[
                               I\ge c\ell>0.                  \tag{5}
@@ -251,17 +269,57 @@ a contradiction.  If $c=2$, then (5)--(7) give
 \]
 again a contradiction.  Hence $G$ has a Seymour vertex.
 
+\section*{AI contribution and provenance}
+
+Jake Brukhman initiated and directed the investigation, selected its
+falsification-first and structural strategy, curated intermediate results,
+chose the theorem for publication, and edited the final statement and
+exposition.  OpenAI language models---principally a Codex GPT-5-family
+multi-agent run and GPT-5.6 Sol---conducted the detailed mathematical
+exploration, implemented counterexample searches and verification tools,
+discovered the fixed-target capacity argument and its double-counting proof,
+and drafted the manuscript.  Claude (Anthropic) was used for an adversarial
+audit of an intermediate draft.  Brukhman is responsible for the final
+manuscript and its claims.
+
 \begin{thebibliography}{9}
 
 \bibitem{Fisher1996}
 D.~C. Fisher,
-\emph{Squaring a tournament: A proof of Dean's conjecture},
+\emph{Squaring a tournament: a proof of Dean's conjecture},
 Journal of Graph Theory \textbf{23} (1996), 43--48.
 
 \bibitem{KanekoLocke2001}
 Y.~Kaneko and S.~C. Locke,
 \emph{The minimum degree approach for Paul Seymour's distance 2 conjecture},
 Congressus Numerantium \textbf{148} (2001), 201--206.
+
+\bibitem{SadhukhanSandeepSen2026}
+A.~Sadhukhan, R.~B. Sandeep, and S.~Sen,
+\emph{A proof of Seymour's second neighborhood conjecture for oriented graphs
+with minimum out-degree equal to 7},
+arXiv:2606.30588 (2026).
+
+\bibitem{FidlerYuster2007}
+D.~Fidler and R.~Yuster,
+\emph{Remarks on the second neighborhood problem},
+Journal of Graph Theory \textbf{55} (2007), 208--220.
+
+\bibitem{Ghazal2012}
+S.~Ghazal,
+\emph{Seymour's second neighborhood conjecture for tournaments missing a
+generalized star},
+Journal of Graph Theory \textbf{71} (2012), 89--94.
+
+\bibitem{EspunyDiazEtAl2024}
+A.~Espuny D\'iaz, A.~Gir\~ao, B.~Granet, and G.~Kronenberg,
+\emph{Seymour's second neighbourhood conjecture: random graphs and reductions},
+arXiv:2403.02842 (2024).
+
+\bibitem{GuoKangZwaneveld2026}
+K.~Guo, R.~J. Kang, and G.~Zwaneveld,
+\emph{Seymour-tight orientations},
+arXiv:2603.29626 (2026).
 
 \end{thebibliography}
 
