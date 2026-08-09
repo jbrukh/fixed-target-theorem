@@ -3,7 +3,7 @@
 A short proof that Seymour's second neighborhood conjecture holds for every
 oriented graph whose order is small relative to its minimum outdegree.
 
-Jake Brukhman.
+Jake Brukhman (CoinFund).
 
 ## What the theorem states
 
@@ -58,7 +58,7 @@ hypothesis.
 
 ## AI contribution and provenance
 
-Attribution for this work is as follows. The author initiated and directed the investigation, selected its falsification-first and structural strategy, curated intermediate results, chose the theorem for publication, and edited the final statement and exposition. OpenAI language models---principally a Codex GPT-5-family multi-agent run and GPT-5.6 Sol---conducted the detailed mathematical exploration, implemented counterexample searches and verification tools, discovered the fixed-target capacity argument and its double-counting proof, and drafted the manuscript. Claude Fable 5 from Anthropic was used for an adversarial audit of an intermediate draft. The author accepts sole responsibility for the final manuscript and its claims.
+The author initiated and directed the investigation, curated intermediate results, selected the theorem for publication, and edited the final statement and exposition. OpenAI language models (GPT-5 family) carried out the detailed mathematical exploration, implemented counterexample searches and verification tools, discovered the fixed-target capacity argument and its double-counting proof, and drafted the manuscript; Anthropic Claude models performed an adversarial audit of an intermediate draft and assisted with revisions. The author verified the proofs and accepts sole responsibility for the final manuscript and its claims.
 
 ## Contents
 

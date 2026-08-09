@@ -7,7 +7,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks,hyperfootnotes=false]{hyperref}
 
 \allowdisplaybreaks
 
@@ -30,11 +30,8 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
-\newcommand{\NOne}{N_1}
-\newcommand{\NTwo}{N_2}
-
 \title{A dense-case theorem for Seymour's second neighborhood conjecture}
-\author{Jake Brukhman\\{\small\texttt{jake@coinfund.io}}}
+\author{Jake Brukhman\\{\small CoinFund}\\{\small\texttt{jake@coinfund.io}}}
 \date{9 August 2026}
 
 \hypersetup{
@@ -73,7 +70,7 @@ $G=(V(G),A(G))$, where $V(G)$ is a finite set of vertices and
 $A(G)$ is a set of ordered pairs of distinct vertices, called \emph{arcs}.
 We write
 \[
-                              u\to v
+ u\to v
 \]
 when $(u,v)\in A(G)$.  Thus the arrow points from the source of the arc to
 its target.  The directed graph is \emph{oriented} if, for every two distinct
@@ -84,17 +81,17 @@ vertices $u,v$, at most one of $u\to v$ and $v\to u$ is present. For a vertex $v
  d^-(v)=|\{x\in V(G):x\to v\}|.
 \]
 The minimum outdegree of $G$ is
-$\delta=\min_{v\in V(G)}d^+(v).$ For a vertex $v\in V(G)$, define the \textit{exact first outneighborhood} by
+$\delta=\min_{v\in V(G)}d^+(v).$ For a vertex $v\in V(G)$, define the \emph{outneighborhood} by
 \[
-                    \NOne(v)=\{x\in V(G):v\to x\},
+ N_1(v)=\{x\in V(G):v\to x\},
 \]
-and the \textit{exact second outneighborhood} by
+and the \emph{exact second outneighborhood} by
 \[
- \NTwo(v)=
- \{x\in V(G)\setminus\NOne(v):
-   y\to x\text{ for some }y\in\NOne(v)\}.
+ N_2(v)=
+ \{x\in V(G)\setminus N_1(v):
+   y\to x\text{ for some }y\in N_1(v)\}.
 \]
-By definition $\NTwo(v)$ is disjoint from $\NOne(v)$; since $G$ is oriented, it also excludes $v$. Thus $\NTwo(v)$ consists exactly of the vertices reached from $v$ in two steps but not in one step.  When discussing reachability from $v$ to $x$, we call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if $|\NTwo(v)|\ge|\NOne(v)|.$
+By definition $N_2(v)$ is disjoint from $N_1(v)$; since $G$ is oriented, it also excludes $v$. Thus $N_2(v)$ consists exactly of the vertices reached from $v$ in two steps but not in one step.  When discussing reachability from $v$ to $x$, we call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if $|N_2(v)|\ge|N_1(v)|.$
 
 \begin{conjecture}[Seymour]
 Every finite oriented graph has a Seymour vertex.
@@ -114,7 +111,7 @@ tournaments.
 
 Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$. Counting arcs by their sources gives
 \[
-                         n\delta\le|A(G)|\le\binom n2,
+ n\delta\le|A(G)|\le\binom n2,
 \]
 so $n\ge2\delta+1$. Equality forces every pair of vertices to be adjacent and every outdegree to equal $\delta$, so the graph is a regular tournament, which satisfies the conjecture by Fisher's theorem~\cite{Fisher1996}.
 
@@ -123,7 +120,7 @@ so $n\ge2\delta+1$. Equality forces every pair of vertices to be adjacent and ev
 Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
 If
 \[
-                              n=2\delta+2,
+ n=2\delta+2,
 \]
 then $G$ has a Seymour vertex.
 \end{theorem}
@@ -132,12 +129,13 @@ At $n=2\delta+2$, up to $n/2$ edges may be missing and no structure is
 imposed on them, in contrast
 to~\cite{Daamouch2021,DaamouchGhazalAlMniny2024,FidlerYuster2007,Ghazal2012};
 conversely, those results impose no lower bound on the minimum outdegree, so
-neither result contains the other.  Corollary~\ref{cor:dense-case} shows that
-any counterexample to the conjecture must satisfy $n\ge2\delta+3$: if the
-conjecture is false, then there exist counterexamples close to regular
-tournaments in the sense of~\cite{GuoKangZwaneveld2026}, but no counterexample
-can occur at the two densest orders an oriented graph of minimum outdegree
-$\delta$ can have.
+neither result contains the other.
+
+Corollary~\ref{cor:dense-case} shows that any counterexample to the
+conjecture must satisfy $n\ge2\delta+3$: no counterexample can occur at the
+two densest orders an oriented graph of minimum outdegree $\delta$ can have.
+This complements the study of counterexamples close to regular tournaments
+in~\cite{GuoKangZwaneveld2026}.
 
 \begin{corollary}\label{cor:dense-case}
 Let $G$ be an oriented graph on $n$ vertices with minimum outdegree $\delta$.
@@ -162,17 +160,18 @@ By Kaneko and Locke's theorem~\cite{KanekoLocke2001}, a counterexample has
 minimum outdegree $\delta\ge7$.  Corollary~\ref{cor:dense-case} then gives
 $n\ge2\delta+3\ge17$.  Under the result of Sadhukhan, Sandeep, and Sen, the
 case $\delta=7$ is also excluded, so $\delta\ge8$ and hence $n\ge19$.
+\end{proof}
+
 Without Theorem~\ref{thm:fixed-target}, the same reasoning gives only
 $n\ge2\delta+2$, since Fisher's theorem excludes just the order $n=2\delta+1$;
 that is, $n\ge16$ unconditionally and $n\ge18$ conditionally.  To our
 knowledge, no stronger order bounds were previously known.
-\end{proof}
 
 \section{The fixed-target argument}
 
 For a source vertex $v$, define
 \[
- U(v)=V(G)\setminus\bigl(\{v\}\cup\NOne(v)\cup\NTwo(v)\bigr).
+ U(v)=V(G)\setminus\bigl(\{v\}\cup N_1(v)\cup N_2(v)\bigr).
 \]
 Thus $U(v)$ is the set of target vertices that the source $v$ cannot reach in
 at most two steps. Now fix a target vertex $x$.  Define the \emph{trap} of $x$ by
@@ -182,24 +181,22 @@ at most two steps. Now fix a target vertex $x$.  Define the \emph{trap} of $x$ b
 These are exactly the vertices that do not send an arc to $x$.  Because $G$
 is oriented, every outneighbor of $x$ belongs to $T(x)$.  Hence
 \[
-                         |T(x)|\ge d^+(x)\ge\delta.
+ |T(x)|\ge d^+(x)\ge\delta.
 \]
 Define the \emph{target slack}
 \[
-                         q(x)=|T(x)|-\delta\ge0.
+ q(x)=|T(x)|-\delta\ge0.
 \]
-Here both $|T(x)|$ and $\delta$ count vertices: $\delta$ is the minimum
-number of outneighbors at any vertex.  Thus $q(x)$ is the number of vertices
-by which the trap exceeds the size of a minimum outneighborhood. Define
+Now define
 \[
-                         P(x)=\{v\in V(G):x\in U(v)\}.
+ P(x)=\{v\in V(G):x\in U(v)\}.
 \]
 Thus $P(x)$ is the set of source vertices from which the fixed target $x$
 cannot be reached in at most two steps.  If $v\in P(x)$, then $v\nrightarrow
-x$.  Moreover, no vertex of $\NOne(v)$ points to $x$, since otherwise there
+x$.  Moreover, no vertex of $N_1(v)$ points to $x$, since otherwise there
 would be a two-step path from $v$ to $x$.  Therefore
 \begin{equation}\label{eq:trap}
- \{v\}\cup\NOne(v)\subseteq T(x).
+ \{v\}\cup N_1(v)\subseteq T(x).
 \end{equation}
 This is the fixed-target observation: every source $v$ that cannot reach $x$ in 2 steps, together with
 all of its outneighbors, is confined to the same trap $T(x)$.
@@ -228,23 +225,20 @@ Consequently,
     +p\bigl(\delta+q(x)-p\bigr).
 \]
 Dividing by $p$ and rearranging gives $p\le2q(x)-1$.  Since $p\ge1$, this
-forces $q(x)\ge1$.  The final assertion follows.
+forces $q(x)\ge1$.  The final assertion is the contrapositive.
 \end{proof}
-
-The point of the lemma is that target slack is the only room available for
-packing many source vertices that all miss the same target.
 
 \begin{proof}[Proof of Theorem~\ref{thm:fixed-target}]
 Suppose for contradiction that $G$ has no Seymour vertex.  Then $\delta>0$,
 since a vertex of outdegree zero is automatically a Seymour vertex.  Let
 \[
-                  L=\{v\in V(G):d^+(v)=\delta\},
-                  \qquad \ell=|L|\ge1.
+ L=\{v\in V(G):d^+(v)=\delta\},
+ \qquad \ell=|L|\ge1.
 \]
-Every $v\in L$ is not a Seymour vertex, so $|\NTwo(v)|\le\delta-1$.
+Every $v\in L$ is not a Seymour vertex, so $|N_2(v)|\le\delta-1$.
 Since $n=2\delta+2$, it follows that
 \begin{equation}\label{eq:demand}
- |U(v)|=n-1-\delta-|\NTwo(v)|\ge2.
+ |U(v)|=n-1-\delta-|N_2(v)|\ge2.
 \end{equation}
 Thus each minimum-outdegree source contributes at least two unreachable
 targets. Let
@@ -254,18 +248,18 @@ targets. Let
 Counting these ordered source--target pairs first by their source and then by
 their target gives
 \begin{equation}\label{eq:doublecount}
-                    I=\sum_{v\in V(G)}|U(v)|
-                     =\sum_{x\in V(G)}|P(x)|
+ I=\sum_{v\in V(G)}|U(v)|
+ =\sum_{x\in V(G)}|P(x)|
 \end{equation}
 since $x\in U(v)$ and $v\in P(x)$ describe the
 same ordered pair $(v,x)$.  From \eqref{eq:demand},
 \begin{equation}\label{eq:lower}
-                              I\ge2\ell>0.
+ I\ge2\ell>0.
 \end{equation}
 
 \noindent Put
 \[
-                              Q=\sum_{x\in V(G)}q(x).
+ Q=\sum_{x\in V(G)}q(x).
 \]
 Since $I>0$, at least one set $P(x)$ is nonempty; Lemma~\ref{lem:capacity}
 then implies that at least one $q(x)$ is positive.  Applying the lemma
@@ -274,7 +268,7 @@ in \eqref{eq:doublecount} gives
  I\le\sum_{q(x)>0}\bigl(2q(x)-1\bigr)
    <2\sum_xq(x)=2Q.
 \end{equation}
-So the total demand is strictly less than twice the total target slack. It remains to compare $Q$ with $\ell$.  Since
+It remains to compare $Q$ with $\ell$.  Since
 $|T(x)|=n-1-d^-(x)$,
 \[
  q(x)=n-1-\delta-d^-(x).
@@ -291,10 +285,9 @@ outdegree at least $\delta+1$.  Therefore
 \end{aligned}
 \end{equation}
 where the last equality uses $n=2\delta+2$.
-This degree ledger bounds the total room in all target traps using only the
-number of minimum-outdegree vertices. Now \eqref{eq:lower}--\eqref{eq:ledger} give
+Now \eqref{eq:lower}--\eqref{eq:ledger} give
 \[
-                           I<2Q\le2\ell\le I,
+ I<2Q\le2\ell\le I,
 \]
 a contradiction.  Hence $G$ has a Seymour vertex.
 \end{proof}
@@ -307,15 +300,18 @@ the comparison $I<2Q\le2\ell+2n$ no longer yields a contradiction.  Extending
 the method past $n=2\delta+2$ therefore requires new ideas.
 \end{remark}
 
-\section*{AI contribution and provenance}
+\section*{Acknowledgments}
 
-Attribution for this work is as follows. The author initiated and directed the investigation, selected its falsification-first and structural strategy, curated intermediate results, chose the theorem for publication, and edited the final statement and exposition. OpenAI language models---principally a Codex GPT-5-family
-multi-agent run and GPT-5.6 Sol---conducted the detailed mathematical
-exploration, implemented counterexample searches and verification tools,
-discovered the fixed-target capacity argument and its double-counting proof,
-and drafted the manuscript. Claude Fable 5 from Anthropic was used for an adversarial
-audit of an intermediate draft. The author accepts sole responsibility for the final
-manuscript and its claims.
+The author initiated and directed the investigation, curated intermediate
+results, selected the theorem for publication, and edited the final statement
+and exposition.  OpenAI language models (GPT-5 family) carried out the
+detailed mathematical exploration, implemented counterexample searches and
+verification tools, discovered the fixed-target capacity argument and its
+double-counting proof, and drafted the manuscript; Anthropic Claude models
+performed an adversarial audit of an intermediate draft and assisted with
+revisions.  The author verified
+the proofs and accepts sole responsibility for the final manuscript and its
+claims.
 
 \begin{thebibliography}{9}
 
@@ -324,6 +320,7 @@ M.~Daamouch,
 \emph{Seymour's second neighborhood conjecture for $m$-free, $k$-transitive,
 $k$-anti-transitive digraphs and some approaches},
 Discrete Applied Mathematics \textbf{304} (2021), 332--341.
+doi:10.1016/j.dam.2021.08.011.
 
 \bibitem{DaamouchGhazalAlMniny2024}
 M.~Daamouch, S.~Ghazal, and D.~Al-Mniny,
@@ -340,17 +337,20 @@ arXiv:2403.02842 (2024).
 D.~Fidler and R.~Yuster,
 \emph{Remarks on the second neighborhood problem},
 Journal of Graph Theory \textbf{55} (2007), 208--220.
+doi:10.1002/jgt.20229.
 
 \bibitem{Fisher1996}
 D.~C. Fisher,
 \emph{Squaring a tournament: a proof of Dean's conjecture},
 Journal of Graph Theory \textbf{23} (1996), 43--48.
+doi:10.1002/(SICI)1097-0118(199609)23:1<43::AID-JGT4>3.0.CO;2-K.
 
 \bibitem{Ghazal2012}
 S.~Ghazal,
 \emph{Seymour's second neighborhood conjecture for tournaments missing a
 generalized star},
 Journal of Graph Theory \textbf{71} (2012), 89--94.
+doi:10.1002/jgt.20634.
 
 \bibitem{GuoKangZwaneveld2026}
 K.~Guo, R.~J. Kang, and G.~Zwaneveld,
