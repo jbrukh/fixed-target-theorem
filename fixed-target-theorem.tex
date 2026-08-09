@@ -61,7 +61,7 @@ Together with Fisher's tournament theorem, this implies the conjecture for
 every oriented graph satisfying $n\le2\delta+2$.
 Combined with the known minimum-outdegree results, this raises the unconditional
 lower bound on the order of a counterexample from $16$ to $17$ and, conditional
-on the recent minimum-outdegree-seven preprint, from $18$ to $19$.
+on a recent pre-print from Sadhukhan, et. al., from $18$ to $19$.
 
 \end{abstract}
 
@@ -155,16 +155,14 @@ $n\ge2\delta+3\ge17$.  Under the result of Sadhukhan, Sandeep, and Sen, the
 case $\delta=7$ is also excluded, so $\delta\ge8$ and hence $n\ge19$.
 \end{proof}
 
-\section{The fixed-target capacity bound}
+\section{The fixed-target argument}
 
 For a source vertex $v$, define
 \[
  U(v)=V(G)\setminus\bigl(\{v\}\cup\NOne(v)\cup\NTwo(v)\bigr).
 \]
 Thus $U(v)$ is the set of target vertices that the source $v$ cannot reach in
-at most two steps.
-
-Now fix a target vertex $x$.  Define the \emph{trap} of $x$ by
+at most two steps. Now fix a target vertex $x$.  Define the \emph{trap} of $x$ by
 \[
  T(x)=\{y\in V(G)\setminus\{x\}:y\nrightarrow x\}.
 \]
@@ -179,9 +177,7 @@ Define the \emph{target slack}
 \]
 Here both $|T(x)|$ and $\delta$ count vertices: $\delta$ is the minimum
 number of outneighbors at any vertex.  Thus $q(x)$ is the number of vertices
-by which the trap exceeds the size of a minimum outneighborhood.
-
-Define
+by which the trap exceeds the size of a minimum outneighborhood. Define
 \[
                          P(x)=\{v\in V(G):x\in U(v)\}.
 \]
@@ -223,11 +219,7 @@ forces $q(x)\ge1$.  The final assertion follows.
 \end{proof}
 
 The point of the lemma is that target slack is the only room available for
-packing many source vertices that all miss the same target.
-
-\section{Proof of the theorem}
-
-Suppose for contradiction that $G$ has no Seymour vertex.  Then $\delta>0$,
+packing many source vertices that all miss the same target. Suppose for contradiction that $G$ has no Seymour vertex.  Then $\delta>0$,
 since a vertex of outdegree zero is automatically a Seymour vertex.  Let
 \[
                   L=\{v\in V(G):d^+(v)=\delta\},
@@ -256,7 +248,7 @@ same ordered pair $(v,x)$.  From \eqref{eq:demand},
                               I\ge2\ell>0.
 \end{equation}
 
-Put
+\noindent Put
 \[
                               Q=\sum_{x\in V(G)}q(x).
 \]
@@ -267,9 +259,7 @@ in \eqref{eq:doublecount} gives
  I\le\sum_{q(x)>0}\bigl(2q(x)-1\bigr)
    <2\sum_xq(x)=2Q.
 \end{equation}
-So the total demand is strictly less than twice the total target slack.
-
-It remains to compare $Q$ with $\ell$.  Since
+So the total demand is strictly less than twice the total target slack. It remains to compare $Q$ with $\ell$.  Since
 $|T(x)|=n-1-d^-(x)$,
 \[
  q(x)=n-1-\delta-d^-(x).
@@ -287,9 +277,7 @@ outdegree at least $\delta+1$.  Therefore
 \end{equation}
 where the last equality uses $n=2\delta+2$.
 This degree ledger bounds the total room in all target traps using only the
-number of minimum-outdegree vertices.
-
-Now \eqref{eq:lower}--\eqref{eq:ledger} give
+number of minimum-outdegree vertices. Now \eqref{eq:lower}--\eqref{eq:ledger} give
 \[
                            I<2Q\le2\ell\le I,
 \]
@@ -305,15 +293,12 @@ past $n=2\delta+2$ therefore requires new ideas.
 
 \section*{AI contribution and provenance}
 
-Jake Brukhman initiated and directed the investigation, selected its
-falsification-first and structural strategy, curated intermediate results,
-chose the theorem for publication, and edited the final statement and
-exposition.  OpenAI language models---principally a Codex GPT-5-family
+Attribution for this work is as follows. The author initiated and directed the investigation, selected its falsification-first and structural strategy, curated intermediate results, chose the theorem for publication, and edited the final statement and exposition. OpenAI language models---principally a Codex GPT-5-family
 multi-agent run and GPT-5.6 Sol---conducted the detailed mathematical
 exploration, implemented counterexample searches and verification tools,
 discovered the fixed-target capacity argument and its double-counting proof,
-and drafted the manuscript.  Claude (Anthropic) was used for an adversarial
-audit of an intermediate draft.  Brukhman is responsible for the final
+and drafted the manuscript. Claude Fable 5 from Anthropic was used for an adversarial
+audit of an intermediate draft. The author accepts sole responsibility for the final
 manuscript and its claims.
 
 \begin{thebibliography}{9}
