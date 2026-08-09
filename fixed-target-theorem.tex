@@ -1,8 +1,11 @@
 \documentclass[12pt]{article}
 
 \usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{fullpage}
+\usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 
 \allowdisplaybreaks
@@ -22,13 +25,14 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem*{conjecture}{Conjecture}
 
-\numberwithin{equation}{section}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 
 \newcommand{\NOne}{N_1}
 \newcommand{\NTwo}{N_2}
 
 \title{A dense-case theorem for Seymour's second-neighborhood conjecture}
-\author{Jake Brukhman}
+\author{Jake Brukhman\\\texttt{jake@coinfund.io}}
 \date{9 August 2026}
 
 \hypersetup{
@@ -39,11 +43,6 @@
 \begin{document}
 \maketitle
 
-\begingroup
-\renewcommand\thefootnote{}
-\footnotetext[0]{Email: \texttt{jake@coinfund.io}}
-\endgroup
-
 \begin{abstract}
 Seymour's Second Neighborhood Conjecture asserts that every finite oriented
 graph has a vertex with at least as many exact second outneighbors as
@@ -53,9 +52,9 @@ proved by Kaneko and Locke~\cite{KanekoLocke2001}; a recent preprint treats
 minimum outdegree seven~\cite{SadhukhanSandeepSen2026}.  For dense incomplete
 graphs, Fidler and Yuster proved the conjecture when the missing edges form a
 matching, a star, or a clique~\cite{FidlerYuster2007}, and Ghazal extended this
-direction to generalized stars~\cite{Ghazal2012}.  We give a short fixed-target
+direction to generalized stars~\cite{Ghazal2012}.  We give a short
 counting proof that the conjecture holds for every oriented graph of order $n$
-and minimum outdegree $\delta$ satisfying $n\le 2\delta+2$, a dense-case with no prescribed
+and minimum outdegree $\delta$ satisfying $n\le 2\delta+2$, a dense case with no prescribed
 structure on the missing edges.
 
 \end{abstract}
@@ -91,7 +90,7 @@ and the exact second outneighborhood by
 Direct outneighbors are excluded explicitly.  The vertex $v$ is excluded
 automatically: a path $v\to y\to v$ would be a directed $2$-cycle, which an
 oriented graph cannot contain.  Thus $\NTwo(v)$ consists exactly of the
-vertices reached from $v$ in two steps but not in one step.  In a reachability statement from $v$ to $x$, we
+vertices reached from $v$ in two steps but not in one step.  When discussing reachability from $v$ to $x$, we
 call $v$ the \emph{source vertex} and $x$ the \emph{target vertex}. A vertex $v$ is a \emph{Seymour vertex} if
 $|\NTwo(v)|\ge|\NOne(v)|.$
 
@@ -115,6 +114,21 @@ If
 \]
 then $G$ has a Seymour vertex.
 \end{theorem}
+
+Two remarks locate the content of Theorem~\ref{thm:fixed-target}.  First,
+every oriented graph satisfies $n\ge2\delta+1$, and equality is attained only
+when every pair of vertices is adjacent and every outdegree equals $\delta$,
+that is, when $G$ is a regular tournament.  The case $n=2\delta+1$ is
+therefore contained in Fisher's theorem~\cite{Fisher1996}, although the proof
+below is independent and short.  The new content is the case $n=2\delta+2$,
+where up to $n/2$ edges may be missing and no structure is imposed on them,
+in contrast to~\cite{FidlerYuster2007,Ghazal2012}; conversely, those results
+impose no lower bound on the minimum outdegree, so neither result contains
+the other.  Second, the theorem shows that any counterexample to the
+conjecture must satisfy $n\ge2\delta+3$: counterexamples, if any exist, can
+be made close to regular tournaments in the sense
+of~\cite{GuoKangZwaneveld2026}, but they cannot occur at the two densest
+orders an oriented graph of minimum outdegree $\delta$ can have.
 
 \section{The fixed-target capacity bound}
 
@@ -150,36 +164,37 @@ Thus $P(x)$ is the set of source vertices from which the fixed target $x$
 cannot be reached in at most two steps.  If $v\in P(x)$, then $v\nrightarrow
 x$.  Moreover, no vertex of $\NOne(v)$ points to $x$, since otherwise there
 would be a two-step path from $v$ to $x$.  Therefore
-\[
-                         \{v\}\cup\NOne(v)\subseteq T(x).   \tag{1}
-\]
+\begin{equation}\label{eq:trap}
+ \{v\}\cup\NOne(v)\subseteq T(x).
+\end{equation}
 This is the fixed-target observation: every source $v$ that cannot reach $x$ in 2 steps, together with
 all of its outneighbors, is confined to the same trap $T(x)$.
 
 \begin{lemma}[Fixed-target capacity]\label{lem:capacity}
-For every target vertex $x$,
+Let $x$ be a target vertex.  If $P(x)\ne\varnothing$, then
 \[
- |P(x)|=0\quad\text{if }q(x)=0,
- \qquad
- |P(x)|\le2q(x)-1\quad\text{if }P(x)\ne\varnothing.
+ q(x)\ge1
+ \qquad\text{and}\qquad
+ |P(x)|\le2q(x)-1.
 \]
+In particular, if $q(x)=0$, then $P(x)=\varnothing$.
 \end{lemma}
 
 \begin{proof}
-Fix $x$ and set $p:=|P(x)|$.
-By (1), $P(x)\subseteq T(x)$, and every arc whose source lies in $P(x)$
-has its target in $T(x)$.
+Suppose $P(x)\ne\varnothing$, and set $p:=|P(x)|\ge1$.
+By \eqref{eq:trap}, $P(x)\subseteq T(x)$, and every arc whose source lies in
+$P(x)$ has its target in $T(x)$.
 There are at least $\delta p$ such arcs.  At most
 $\binom{p}{2}$ have both endpoints in $P(x)$, because $G$ is oriented, and at
 most $p\bigl(|T(x)|-p\bigr)$ go from $P(x)$ to the rest of the trap.
-Consequently, if $p>0$, then
+Consequently,
 \[
  \delta p
  \le \binom{p}{2}
     +p\bigl(\delta+q(x)-p\bigr).
 \]
-Dividing by $p$ and rearranging gives $p\le2q(x)-1$.  This is impossible when
-$q(x)=0$, so then $p=0$.
+Dividing by $p$ and rearranging gives $p\le2q(x)-1$.  Since $p\ge1$, this
+forces $q(x)\ge1$.  The final assertion follows.
 \end{proof}
 
 The point of the lemma is that target slack is the only room available for
@@ -194,9 +209,9 @@ arcs by their sources gives
                          n\delta\le|A(G)|\le\binom n2.
 \]
 Therefore $n\ge2\delta+1$.  Together with the hypothesis, this leaves
-\[
-                         c:=n-2\delta\in\{1,2\}.             \tag{2}
-\]
+\begin{equation}\label{eq:c}
+ c:=n-2\delta\in\{1,2\}.
+\end{equation}
 
 Let
 \[
@@ -206,40 +221,38 @@ Let
 Some vertex attains the minimum outdegree, so $\ell\ge1$.
 Every $v\in L$ is not a Seymour vertex, so $|\NTwo(v)|\le\delta-1$.
 Hence
-\[
- |U(v)|=n-1-\delta-|\NTwo(v)|\ge n-2\delta=c.               \tag{3}
-\]
+\begin{equation}\label{eq:demand}
+ |U(v)|=n-1-\delta-|\NTwo(v)|\ge n-2\delta=c.
+\end{equation}
 Thus each minimum-outdegree source contributes at least $c$ unreachable
-targets.
-
-Let
+targets. Let
 \[
  I=\bigl|\{(v,x)\in V(G)^2:x\in U(v)\}\bigr|.
 \]
 Counting these ordered source--target pairs first by their source and then by
 their target gives
-\[
+\begin{equation}\label{eq:doublecount}
                     I=\sum_{v\in V(G)}|U(v)|
-                     =\sum_{x\in V(G)}|P(x)|.               \tag{4}
-\]
+                     =\sum_{x\in V(G)}|P(x)|
+\end{equation}
 since $x\in U(v)$ and $v\in P(x)$ describe the
-same ordered pair $(v,x)$.  From (3),
-\[
-                              I\ge c\ell>0.                  \tag{5}
-\]
+same ordered pair $(v,x)$.  From \eqref{eq:demand},
+\begin{equation}\label{eq:lower}
+                              I\ge c\ell>0.
+\end{equation}
 
 Put
 \[
                               Q=\sum_{x\in V(G)}q(x).
 \]
-Since $I>0$, at least one set $P(x)$ is nonempty; the capacity lemma then
-implies that at least one $q(x)$ is positive.  Applying the lemma in (4) gives
-\[
+Since $I>0$, at least one set $P(x)$ is nonempty; Lemma~\ref{lem:capacity}
+then implies that at least one $q(x)$ is positive.  Applying the lemma
+in \eqref{eq:doublecount} gives
+\begin{equation}\label{eq:capacity}
  I\le\sum_{q(x)>0}\bigl(2q(x)-1\bigr)
-   <2\sum_xq(x)=2Q.                                          \tag{6}
-\]
-So the total target capacity is strictly less than twice the total target
-slack.
+   <2\sum_xq(x)=2Q.
+\end{equation}
+So the total demand is strictly less than twice the total target slack.
 
 It remains to compare $Q$ with $\ell$.  Since
 $|T(x)|=n-1-d^-(x)$,
@@ -248,7 +261,7 @@ $|T(x)|=n-1-d^-(x)$,
 \]
 Total indegree equals total outdegree, and every vertex outside $L$ has
 outdegree at least $\delta+1$.  Therefore
-\begin{equation}
+\begin{equation}\label{eq:ledger}
 \begin{aligned}
  Q
  &=n(n-1-\delta)-\sum_xd^+(x)\\
@@ -256,20 +269,27 @@ outdegree at least $\delta+1$.  Therefore
    -\bigl(\ell\delta+(n-\ell)(\delta+1)\bigr)\\
  &=\ell+n(c-2).
 \end{aligned}
-\tag{7}
 \end{equation}
 This degree ledger bounds the total room in all target traps using only the
 number of minimum-outdegree vertices.
 
-If $c=1$, then (7) gives
+If $c=1$, then \eqref{eq:ledger} gives
 \[
                            0<Q\le\ell-n\le0,
 \]
-a contradiction.  If $c=2$, then (5)--(7) give
+a contradiction.  If $c=2$, then \eqref{eq:lower}--\eqref{eq:ledger} give
 \[
                            I<2Q\le2\ell\le I,
 \]
 again a contradiction.  Hence $G$ has a Seymour vertex.
+
+\begin{remark}
+The bound $n\le2\delta+2$ is exactly where this argument stops.  For
+$c=n-2\delta=3$, the ledger \eqref{eq:ledger} gives only $Q\le\ell+n$, while
+\eqref{eq:lower} gives $I\ge3\ell$; since $\ell\le n$, the comparison
+$I<2Q\le2\ell+2n$ no longer yields a contradiction.  Extending the method
+past $n=2\delta+2$ therefore requires new ideas.
+\end{remark}
 
 \section*{AI contribution and provenance}
 
