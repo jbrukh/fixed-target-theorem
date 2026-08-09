@@ -25,16 +25,20 @@ vertex.
 Seymour's second neighborhood conjecture asserts that *every* finite oriented
 graph has a Seymour vertex. It remains open in general. Known cases include
 tournaments (Fisher, 1996) and minimum outdegree at most six (Kaneko and Locke,
-2001); a 2026 preprint treats minimum outdegree seven. For dense incomplete
-graphs, Fidler and Yuster proved the conjecture for prescribed missing-edge
-structures including matchings, stars, and cliques, and Ghazal extended this
-direction to generalized stars. The theorem here requires no prescribed
-structure on the missing edges.
+2001); a 2026 preprint of Sadhukhan, Sandeep, and Sen treats minimum outdegree
+seven. For dense incomplete graphs, Fidler and Yuster proved the conjecture for
+prescribed missing-edge structures including matchings, stars, and cliques,
+Ghazal extended this direction to generalized stars, and Daamouch, Ghazal, and
+Al-Mniny treated further prescribed structures such as two stars and disjoint
+paths. The theorem here requires no prescribed structure on the missing edges.
 
 Every oriented graph satisfies $n \ge 2\delta + 1$, with equality only for a
 regular tournament. Thus Fisher handles the equality boundary, while the new
 dense-case theorem handles the next order. Equivalently, any counterexample
-to the conjecture must satisfy $n \ge 2\delta + 3$.
+to the conjecture must satisfy $n \ge 2\delta + 3$. Combined with the known
+minimum-outdegree results, this raises the best known lower bound on the order
+of a counterexample from 16 to 17 vertices — and, conditional on the 2026
+preprint, from 18 to 19.
 
 ## How the proof works
 
@@ -54,16 +58,7 @@ hypothesis.
 
 ## AI contribution and provenance
 
-Jake Brukhman initiated and directed the investigation, selected its
-falsification-first and structural strategy, curated intermediate results,
-chose the theorem for publication, and edited the final statement and
-exposition. OpenAI language models—principally a Codex GPT-5-family multi-agent
-run and GPT-5.6 Sol—conducted the detailed mathematical exploration,
-implemented counterexample searches and verification tools, discovered the
-fixed-target capacity argument and its double-counting proof, and drafted the
-manuscript. Claude Fable 5 (Anthropic) was used for an adversarial audit of an
-intermediate draft. Brukhman is responsible for the final manuscript and its
-claims.
+Attribution for this work is as follows. The author initiated and directed the investigation, selected its falsification-first and structural strategy, curated intermediate results, chose the theorem for publication, and edited the final statement and exposition. OpenAI language models---principally a Codex GPT-5-family multi-agent run and GPT-5.6 Sol---conducted the detailed mathematical exploration, implemented counterexample searches and verification tools, discovered the fixed-target capacity argument and its double-counting proof, and drafted the manuscript. Claude Fable 5 from Anthropic was used for an adversarial audit of an intermediate draft. The author accepts sole responsibility for the final manuscript and its claims.
 
 ## Contents
 
