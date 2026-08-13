@@ -67,6 +67,21 @@ The author initiated and directed the investigation, curated intermediate result
 
 Build with `pdflatex dense-case-snc.tex`.
 
+## Lean formalization
+
+[`DenseCaseSNC.lean`](DenseCaseSNC.lean) formally verifies the dense-case
+theorem in Lean 4. It defines finite oriented graphs and exact second
+outneighborhoods, proves the fixed-target capacity lemma and both double-counting
+identities, and derives the existence of a Seymour vertex when `n = 2δ + 2`.
+There are no axioms or `sorry` placeholders in the development.
+
+With [Elan](https://lean-lang.org/lean4/doc/setup.html) installed, run:
+
+```sh
+lake update
+lake build
+```
+
 ## Status
 
 Preprint. Not yet peer-reviewed; comments and corrections are welcome.
